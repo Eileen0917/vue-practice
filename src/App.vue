@@ -1,21 +1,12 @@
 <template>
   <div id="app">
-  <form>
-    <fieldset>
-      <legend>Choose</legend>
-        <select v-model="clan">
-          <option v-for="(types, clan) in clans">{{clan}}</option>
-        </select>
+    <button @click="taxiCalled = true">
+      call a cab
+    </button>
+    <transition enter-active-class="animated slideInRight">
+      <p v-if="taxiCalled">🚕</p>
+    </transition>
 
-        <select v-model="type">
-          <option v-for="(species, type) in clans[clan]">{{type}}</option>
-        </select>
-
-        <select v-if="clans[clan]">
-          <option v-for="(animals,species) in clans[clan][type]">{{species}}</option>
-        </select>
-    </fieldset>
-  </form>
   </div>
 </template>
 
@@ -24,29 +15,7 @@ export default {
   name: 'app',
   data: function () {
     return {
-      clan: undefined,
-      type: undefined,
-      clans: {
-        mammalia: {
-          'have fingers': {
-            human: 'human',
-            chimpanzee: 'chimpanzee'
-          },
-          'fingerless': {
-            cat: 'cat',
-            bear: 'bear'
-          }
-        },
-        birds: {
-          'flying': {
-            eagle: 'eagle',
-            pidgeon: 'pidgeon'
-          },
-          'non flying': {
-            chicken: 'chicken'
-          }
-        }
-      },
+      taxiCalled: false
     }
   },
 }
