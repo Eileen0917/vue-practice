@@ -1,9 +1,12 @@
 <template>
   <div id="app">
-    <button @click="taxiCalled = true">
+    <button @click="taxiCalled = !taxiCalled">
       call a cab
     </button>
-    <transition enter-active-class="animated slideInRight">
+    <transition
+      @enter="enter"
+      :css="false"
+    >
       <p v-if="taxiCalled">🚕</p>
     </transition>
 
@@ -18,6 +21,13 @@ export default {
       taxiCalled: false
     }
   },
+  methods: {
+    enter (e1) {
+      Velocity(e1,
+      { opacity: [1, 0], translateX: ["0px", "200px"] },
+      { duration: 2000, easing: "ease-out" } )
+    }
+  }
 }
 </script>
 
