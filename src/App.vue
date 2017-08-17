@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    <button @click="taxiCalled = !taxiCalled">
+    <button @click="taxiCalled = true">
       call a cab
+    </button>
+    <button @click="taxiCalled = false">
+      Cancel
     </button>
     <transition
       @enter="enter"
+      @leave="leave"
       :css="false"
     >
       <p v-if="taxiCalled">🚕</p>
@@ -26,6 +30,11 @@ export default {
       Velocity(e1,
       { opacity: [1, 0], translateX: ["0px", "200px"] },
       { duration: 2000, easing: "ease-out" } )
+    },
+    leave (e1, done) {
+      Velocity(e1,
+      { opacity: [0, 1], 'font-size': ['0.1em', '1em'] },
+      { duration: 2000, complete: done } )
     }
   }
 }
